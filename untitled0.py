@@ -33,8 +33,10 @@ class SimpleBalancedDecisionTree():
 
 
 class DecisionTree():
-    def __init__(self, head):
+    def __init__(self, head, attr_length):
         self.head = head
+        self.nodes_list = list()
+        self.attr_length = attr_length
     
     # Adding nodes
     # The direction is an array containing zeros and ones
@@ -52,7 +54,8 @@ class DecisionTree():
                         temp.right = node
                         node.parent = temp
                         placed = True
-                        break
+                        self.nodes_list.append(node)
+                        return
                     else:
                         temp = temp.right
                 else:
@@ -60,7 +63,8 @@ class DecisionTree():
                         temp.left = node
                         node.parent = temp
                         placed = True
-                        break
+                        self.nodes_list.append(node)
+                        return
                     else:
                         temp = temp.left
     
@@ -85,12 +89,70 @@ class DecisionTree():
         results = np.zeros(len(data_set))
         for i in range(len(data_set)):
             results[i] = self.predict[data_set[i]]
-    
-    def mutate_tree(self):
         
-            
+    def mutation(self):
+        temp = self.head
+        mutated = False
+        
+        index = np.random.randint(0, len(self.nodes_list))
+        temp = self.nodes_list[index]
+        temp.indice = np.random.randint(0, self.attr_length)
+        temp.value = np.random.uniform(0, 10)
+        
+    
+    def crossover(self, other):
+        clone = self.clone_tree()
+        clone2 = other.clone_tree()
+        
+        rand_node = self.random_node()
+        rand_node = other.random_node()
+        
+        
+        
+        index = np.random.randint(0, len(self.nodes_list))
+        temp = self.nodes_list[index]
+        
+        
+    def random_node(self):
+        
+    
+    def clone_tree(self):
+        clone_head = self.head.clone_with_children()
+        new_tree = DecisionTree(clone_head)
+        return new_tree
+    
+
+       
 
 
+
+       
+           
+
+
+class SimpleDecisionNode():
+    def __init__(self, indice, test_value, parent=None, left=None, right=None):
+        self.parent = parent
+        self.left = left
+        self.right = right
+        self.indice = indice
+        self.test_value = test_value
+
+    def test(self, data_row):
+        if data_row[sum_val] < self.test_value:
+            # Move to right
+            return 1
+        else:
+            # Move to left
+            return 0
+    
+    def clone_with_children(self):
+        clone = SimpleDecisionNode(self.indice, self.test_value)
+        if self.right != None:
+            clone.right = self.right.clone_with_children()
+        if self.left != None:
+            clone.left = self.left.clone_with_children()
+        return clone
 
 
 
