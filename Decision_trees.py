@@ -114,6 +114,7 @@ class DecisionTree():
         
         
     def random_node(self):
+        pass
         
     
     def clone_tree(self):
