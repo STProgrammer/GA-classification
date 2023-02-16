@@ -1,6 +1,6 @@
 # Genetic Algorithms classification
 
-It's answer to graded assignment from "AI methods and applications" course, DTE-2501, from UiT The Arctic University of Norway.
+It's answer to graded assignment from "AI methods and applications" course, DTE-2501 autumn 2021, from UiT The Arctic University of Norway.
 
 Read the file "GA-text-classification.ipynb" for the whole report.
 
